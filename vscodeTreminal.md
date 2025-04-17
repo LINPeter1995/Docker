@@ -26,7 +26,7 @@ RUN poetry config virtualenvs.create false && poetry install --no-root --no-inte
 # 複製剩下的所有檔案
 COPY . .
 
-# 預設執行指令
+# 指定啟動腳本（假設你的程式在 coffee/coffee.py）
 CMD ["python", "coffee/coffee.py"]
 
 ------------------------------------------------------------------------------------------------------------
