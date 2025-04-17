@@ -75,11 +75,11 @@ apt-get install -y \
     
 # 安裝 curl
 
-apt-get update、
-apt-get install -y curl、
-apt-get install -y unzip、
-apt-get install -y libglib2.0-0、
-apt-get install -y libnss3、
+apt-get update
+apt-get install -y curl \
+apt-get install -y unzip \
+apt-get install -y libglib2.0-0 \
+apt-get install -y libnss3 \
 apt-get install -y libxcb1
 
 # 下載 chromedriver
