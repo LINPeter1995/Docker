@@ -100,7 +100,7 @@ chmod +x /usr/bin/chromedriver
 
 poetry add webdriver_manager
 
-#從新整理程式碼
+# 從新整理程式碼
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
