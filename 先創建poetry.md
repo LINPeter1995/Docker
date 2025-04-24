@@ -1,4 +1,4 @@
-# 先創建poetry
+# 先創poetry
 
 poetry init
 
