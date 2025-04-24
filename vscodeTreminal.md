@@ -20,7 +20,7 @@ RUN pip install poetry
 # 複製必要檔案
 COPY pyproject.toml poetry.lock README.md ./
 
-# 安裝依賴（不建虛擬環境、也不裝目前專案）
+# 安裝依賴
 RUN poetry config virtualenvs.create false && poetry install --no-root --no-interaction --no-ansi
 
 #複製剩下的所有檔案
