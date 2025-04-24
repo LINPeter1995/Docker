@@ -23,12 +23,17 @@ COPY pyproject.toml poetry.lock README.md ./
 # 安裝依賴（不建虛擬環境、也不裝目前專案）
 RUN poetry config virtualenvs.create false && poetry install --no-root --no-interaction --no-ansi
 
-# 複製剩下的所有檔案
+#複製剩下的所有檔案
 COPY . .
 
-# 指定啟動腳本（假設你的程式在 coffee/coffee.py）
-CMD ["python", "coffee/coffee.py"]
+# 複製啟動腳本
+COPY start.sh /app/start.sh
 
+# 確保啟動腳本有執行權限
+RUN chmod +x /app/start.sh
+
+# 使用啟動腳本
+CMD ["bash", "/app/start.sh"]
 ------------------------------------------------------------------------------------------------------------
 
 # 創建 Dockerignore
@@ -47,13 +52,6 @@ docker build -t 映像名稱 .
 
 docker run --rm 容器名稱
 
-poetry.lock 檔案不匹配，Poetry 提示你需要重新生成 poetry.lock 檔案。
-
-解決方案：
-
-在本地執行 poetry lock 來更新 poetry.lock 檔案：
-
-poetry lock
 
 執行完後，會更新 poetry.lock 檔案，你可以再將它複製到 Docker 容器中。然後重新執行 Docker build：
 
