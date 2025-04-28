@@ -1,4 +1,7 @@
-通常要先讓docker啟動載入全部的套件才能下載poetry
+# 通常要先讓docker啟動載入全部的套件才能下載poetry
+
+docker build -t my-poetry-app .
+docker run -it --rm -v ${PWD}:/app my-poetry-app bash
 
 # 先創poetry
 
