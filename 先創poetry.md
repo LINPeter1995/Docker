@@ -1,3 +1,5 @@
+通常要先讓docker啟動載入全部的套件才能下載poetry
+
 # 先創poetry
 
 要使用 Poetry，你本機必須先安裝好 Python
