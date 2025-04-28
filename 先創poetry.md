@@ -1,5 +1,7 @@
 # 先創poetry
 
+要使用 Poetry，你本機必須先安裝好 Python
+
 poetry init
 
 poetry add pandas nump 先裝才有poetry.lock
