@@ -21,3 +21,17 @@ poetry.lock 檔案不匹配，Poetry 提示你需要重新生成 poetry.lock 檔
 在本地執行 poetry lock 來更新 poetry.lock 檔案：
 
 poetry lock
+
+# 🎯 小總結（重點流程快速版）
+
+docker build -t my-poetry-app .
+
+docker run -it --rm -v ${PWD}:/app my-poetry-app bash
+
+# 進容器後
+
+poetry init
+
+poetry add pandas numpy
+
+poetry lock
