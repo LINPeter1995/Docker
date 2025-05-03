@@ -9,7 +9,7 @@ echo. > Dockerfile
 # 複製貼上Dockerfile
 
 # 使用官方 Python 映像檔
-FROM python:3.12-slim
+FROM python:3.12.10
 
 # 設定工作目錄
 WORKDIR /app
@@ -34,6 +34,7 @@ RUN chmod +x /app/start.sh
 
 # 使用啟動腳本
 CMD ["bash", "/app/start.sh"]
+
 ------------------------------------------------------------------------------------------------------------
 
 # 創建 Dockerignore
@@ -52,7 +53,6 @@ docker build -t 映像名稱 .
 
 docker run --rm 容器名稱
 
-
 執行完後，會更新 poetry.lock 檔案，你可以再將它複製到 Docker 容器中。然後重新執行 Docker build：
 
 docker build -t 容器名稱 .
@@ -64,6 +64,7 @@ docker run -it 容器名稱 /bin/bash
 # 下載Chromedriver相關的庫
 
 apt-get update
+
 apt-get install -y \
     libnss3 \
     libgconf-2-4 \
@@ -74,21 +75,29 @@ apt-get install -y \
 # 安裝 curl
 
 apt-get update
+
 apt-get install -y curl \
+
 apt-get install -y unzip \
+
 apt-get install -y libglib2.0-0 \
+
 apt-get install -y libnss3 \
+
 apt-get install -y libxcb1
 
 # 下載 chromedriver
 
 CHROME_DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+
 curl -O https://chromedriver.storage.googleapis.com/${CHROME_DRIVER_VERSION}/chromedriver_linux64.zip
 
 # 解壓縮並移動 chromedriver
 
 unzip chromedriver_linux64.zip
+
 mv chromedriver /usr/bin/
+
 chmod +x /usr/bin/chromedriver
 
 # 確認安裝
