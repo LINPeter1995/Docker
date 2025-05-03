@@ -22,7 +22,7 @@ poetry.lock 檔案不匹配，Poetry 提示你需要重新生成 poetry.lock 檔
 
 poetry lock
 
-# 🎯 小總結（重點流程快速版）
+# 小總結（重點流程快速版）
 
 docker build -t my-poetry-app .
 
