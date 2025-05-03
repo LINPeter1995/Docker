@@ -1,12 +1,8 @@
-# 創建Dockerfile
-
-如果你用的是 CMD，請打：
+創建 Dockerfile
 
 echo. > Dockerfile
 
------------------------------------------------------------------------------------------------------------
-
-# 複製貼上Dockerfile
+將下列內容貼進 Dockerfile 中：
 
 # 使用官方 Python 映像檔
 FROM python:3.12.10
@@ -14,54 +10,50 @@ FROM python:3.12.10
 # 設定工作目錄
 WORKDIR /app
 
-# 安裝 poetry
+# 安裝 Poetry
 RUN pip install poetry
 
-# 複製必要檔案
+# 複製專案核心設定檔
 COPY pyproject.toml poetry.lock README.md ./
 
-# 安裝依賴
+# 安裝依賴，不創建虛擬環境
 RUN poetry config virtualenvs.create false && poetry install --no-root --no-interaction --no-ansi
 
-#複製剩下的所有檔案
+# 複製剩下所有檔案
 COPY . .
 
 # 複製啟動腳本
 COPY start.sh /app/start.sh
 
-# 確保啟動腳本有執行權限
+# 確保腳本可執行
 RUN chmod +x /app/start.sh
 
-# 使用啟動腳本
+# 容器啟動執行腳本
 CMD ["bash", "/app/start.sh"]
 
-------------------------------------------------------------------------------------------------------------
+________________________________________________________________________________________________________________________________________
 
-# 創建 Dockerignore
+創建 .dockerignore
 
 echo. > .dockerignore
 
-# 補一個 README.md
+創建 README.md
 
 echo "# my_workspace" > README.md
 
-# 建立 Docker 映像
+Step 2：建置 Docker 映像檔
 
-docker build -t 映像名稱 .
+docker build -t my-image-name .
 
-# 執行容器
+Step 3：執行容器
 
-docker run --rm 容器名稱
+docker run --rm my-image-name
 
-執行完後，會更新 poetry.lock 檔案，你可以再將它複製到 Docker 容器中。然後重新執行 Docker build：
+如需進入容器內部（互動模式）：
 
-docker build -t 容器名稱 .
+docker run -it my-image-name /bin/bash
 
-# 進入容器
-
-docker run -it 容器名稱 /bin/bash
-
-# 下載Chromedriver相關的庫
+Step 4：安裝 ChromeDriver 所需套件（容器內執行）
 
 apt-get update
 
@@ -70,29 +62,17 @@ apt-get install -y \
     libgconf-2-4 \
     libxi6 \
     libgdk-pixbuf2.0-0 \
-    libasound2
+    libasound2 \
+    curl \
+    unzip \
+    libglib2.0-0 \
+    libxcb1
     
-# 安裝 curl
-
-apt-get update
-
-apt-get install -y curl \
-
-apt-get install -y unzip \
-
-apt-get install -y libglib2.0-0 \
-
-apt-get install -y libnss3 \
-
-apt-get install -y libxcb1
-
-# 下載 chromedriver
+Step 5：下載並安裝 ChromeDriver
 
 CHROME_DRIVER_VERSION=$(curl -sS https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
 
 curl -O https://chromedriver.storage.googleapis.com/${CHROME_DRIVER_VERSION}/chromedriver_linux64.zip
-
-# 解壓縮並移動 chromedriver
 
 unzip chromedriver_linux64.zip
 
@@ -100,21 +80,26 @@ mv chromedriver /usr/bin/
 
 chmod +x /usr/bin/chromedriver
 
-# 確認安裝
+確認是否安裝成功：
 
 /usr/bin/chromedriver --version
 
-# 然後在你的 Poetry 環境中安裝 webdriver_manager
+Step 6：在 Poetry 中安裝 webdriver_manager
 
 poetry add webdriver_manager
 
-# 從新整理程式碼
+Step 7：範例 Python 程式碼（使用 webdriver_manager）
 
 from selenium import webdriver
-
 from selenium.webdriver.chrome.service import Service
-
 from selenium.webdriver.chrome.options import Options
-
 from webdriver_manager.chrome import ChromeDriverManager
 
+options = Options()
+options.add_argument("--headless")  # 如果你要無頭模式
+service = Service(ChromeDriverManager().install())
+
+driver = webdriver.Chrome(service=service, options=options)
+driver.get("https://www.google.com")
+print(driver.title)
+driver.quit()
