@@ -26,7 +26,7 @@ poetry lock
 
 docker build -t my-app .
 
-docker run 
+docker run my-app
 
 # 進容器後
 
