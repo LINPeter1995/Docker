@@ -10,7 +10,7 @@ docker run
 
 poetry init
 
-poetry add pandas nump 先裝才有poetry.lock
+poetry add pandas numpy 先裝才有poetry.lock
 
 ----------------------------------------------------------------------------------------------
 
