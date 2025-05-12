@@ -35,3 +35,7 @@ poetry init
 poetry add pandas numpy
 
 poetry lock
+
+# 要進入一個已執行中的 Docker 容器，請使用以下指令：
+
+docker exec -it my-app /bin/bash
