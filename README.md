@@ -24,9 +24,9 @@ poetry lock
 
 # 小總結（重點流程快速版）
 
-docker build -t my-poetry-app .
+docker build -t my-app .
 
-docker run -it --rm -v ${PWD}:/app my-poetry-app bash
+docker run -it --rm -v ${PWD}:/app my-app bash
 
 # 進容器後
 
