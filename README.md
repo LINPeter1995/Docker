@@ -2,7 +2,7 @@
 
 docker build -t my-poetry-app .
 
-docker run -it --rm -v ${PWD}:/app my-app bash
+docker run
 
 # 先創poetry
 
