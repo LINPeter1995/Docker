@@ -1,6 +1,6 @@
 # 通常要先讓docker啟動載入全部的套件才能下載poetry
 
-docker build -t my-poetry-app .
+docker build -t my-app .
 
 docker run
 
